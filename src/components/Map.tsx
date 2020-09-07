@@ -6,7 +6,7 @@ interface IProps  {
   events: any[]
 }
 
-const API_KEY = 'AIzaSyAmu9nol12It2xvWk00g4NwocROPL2rFZs';
+const API_KEY = '';
 
 const defaultProps = {
     center: { lat: 32.06, lng: 34.82 },
