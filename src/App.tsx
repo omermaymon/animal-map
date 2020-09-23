@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Map from "./components/Map";
 import {
     BrowserRouter as Router,
     Switch,
@@ -11,29 +10,55 @@ import {
     useHistory,
     useLocation
   } from "react-router-dom";
-  import Form from "./components/Form"
+  import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+  } from 'react-places-autocomplete';
+  import Form from "./components/Form";
+  import Map from "./components/Map";
+import { Button } from '@material-ui/core';
 
 export interface cordi{
     lat: number | undefined
     lng: number | undefined
 }
 
+// export interface Fform {
+//     address: string
+//     date: Date
+//     animal: string
+//     NumOfAnimals: number
+//     typeOfEvent: string
+//     nameOfperson: string
+//     phone: string
+//     lat: number
+//     lng: number
+//     other?: {}
+// }
+
 
 
 const App = React.memo(()=>{
+    const [form, setForm] = useState({address:"", date: new Date(), animal: "Cat", numOfAnimals: 0, typeOfEvent: "",
+                                    nameOfPerson: "", phone: "", lat: 0, lng: 0, feederName: "", feederPhone: "", sterlizedCats: 0, unsterlizedCats: 0 })
     const [events, setEvents] = useState<object[]>([])
     const [show, setShow] = useState<boolean>(false)
     const [markers, setMarkers] = useState<object[]>([])  
     const [cordinates, setCordinates] = useState<cordi>({lat: undefined, lng: undefined})
-    
-
-    
-    
+    console.log(form)
     if (show){
-        return <Form cordinates={cordinates} setShow = {setShow}/>
+        return <Form cordinates={cordinates} setShow = {setShow} form={form} setForm= {setForm}/>
     }
     else{
-        return (<Map events={events} toShow = {setShow} markers = {markers} setMarkers = {setMarkers} setCordinates = {setCordinates} />)
+        return (
+                <div>
+                    <div>
+                        <Button variant="contained" onClick={() => setShow(!show)}>Fill a form</Button>
+                    </div>
+                    <div>
+                    <Map events={events} toShow = {setShow} markers = {markers} setMarkers = {setMarkers} setCordinates = {setCordinates} />
+                    </div>
+                </div>    )
     }
         
 })

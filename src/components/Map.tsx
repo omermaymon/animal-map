@@ -13,7 +13,7 @@ interface IProps  {
   setCordinates: any
 }
 
-const API_KEY = '';
+export const API_KEY: string = '';
 
 const defaultProps = {
     center: { lat: 32.06, lng: 34.82 },
@@ -44,7 +44,7 @@ export const Map = React.memo<IProps>((props) => {
     let lng = obj.lng
     //props.setMarkers(props.markers.concat(<Event lat= {lat} lng = {lng} text={"omer"}/>))
     props.setCordinates({lat: obj.lat, lng: obj.lng})
-    props.toShow(true);
+    //props.toShow(true);
     
   }
   
