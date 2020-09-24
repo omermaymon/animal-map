@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation
-  } from "react-router-dom";
-  import PlacesAutocomplete, {
+import Map from "./components/Map";
+import Form from "./components/Form"
+import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
   } from 'react-places-autocomplete';
-  import Form from "./components/Form";
-  import Map from "./components/Map";
 import { Button } from '@material-ui/core';
 
 export interface cordi{
@@ -33,10 +22,8 @@ export interface cordi{
 //     phone: string
 //     lat: number
 //     lng: number
-//     other?: {}
+//     
 // }
-
-
 
 const App = React.memo(()=>{
     const [form, setForm] = useState({address:"", date: new Date(), animal: "Cat", numOfAnimals: 0, typeOfEvent: "",
@@ -59,9 +46,7 @@ const App = React.memo(()=>{
                     <Map events={events} toShow = {setShow} markers = {markers} setMarkers = {setMarkers} setCordinates = {setCordinates} />
                     </div>
                 </div>    )
-    }
-        
-})
+    }})
 
 
 export default App;

@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import GoogleMap from 'google-map-react';
 import { EventTypes } from '../EventTypes';
+
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { Event } from './Event'
+import { isUndefined } from "util";
+import SearchBox from "./SearchBox";
+import PropTypes from 'prop-types';
+import Marker from "./Marker";
+import { AnyARecord } from "dns";
+
 
 interface IProps  {
   events: any[]
@@ -13,7 +20,10 @@ interface IProps  {
   setCordinates: any
 }
 
-export const API_KEY: string = '';
+
+
+const API_KEY = 'AIzaSyAmu9nol12It2xvWk00g4NwocROPL2rFZs';
+
 
 const defaultProps = {
     center: { lat: 32.06, lng: 34.82 },
@@ -36,9 +46,8 @@ const getColorByEventType = (eventType: string) => {
 
 
 export const Map = React.memo<IProps>((props) => {
-  
-  
-  const _onClick = (obj: any) => {
+
+    const _onClick = (obj: any) => {
     console.log(obj.lat, obj.lng)
     let lat = obj.lat
     let lng = obj.lng
@@ -53,6 +62,45 @@ export const Map = React.memo<IProps>((props) => {
     });  
     
     
+
+  const [location, setLocation] =  React.useState({address:"דרך מצדה 6, באר שבע, ישראל",
+  lat: 31.2591166,
+  lng: 34.7955966})
+  
+    const [state, setState] = React.useState( {
+      mapsApiLoaded: false,
+      mapInstance: null,
+      mapsapi: null,
+    })
+    const markers: any = [""];
+    props.events.forEach(element => {
+      
+    });  
+  const apiLoaded= (map:any, maps:any) => {
+    setState({
+      mapsApiLoaded: true,
+      mapInstance: map,
+      mapsapi: maps,
+    });
+  }
+  const getMapOptions = (maps: any) => {
+    return {
+      disableDefaultUI: true,
+      mapTypeControl: true,
+      streetViewControl: true,
+      styles: [{ featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'on' }] }],
+    };
+  };
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position:any) => {
+      setLocation({
+        address:"",
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      })     
+  })
+}
+  
     return (
         <div style={{ height: '100vh', width: '100%' }}>
           <GoogleMap 
@@ -63,9 +111,27 @@ export const Map = React.memo<IProps>((props) => {
             }}
             defaultCenter={defaultProps.center}
             defaultZoom={defaultProps.zoom}
-          onClick={_onClick}>
+            center = {location}
+            options={getMapOptions}
+          onClick={_onClick}
+          yesIWantToUseGoogleMapApiInternals
+            onGoogleApiLoaded={({ map, maps }) => {
+              apiLoaded(map, maps);
+            }} >
             {props.markers}
+            <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&sensor=false"></script>
+            {state.mapsApiLoaded && <SearchBox map={state.mapInstance} mapsapi={state.mapsapi} placeholder ={PropTypes.string} onPlacesChanged = {PropTypes.func} location = {location} setLocation = {setLocation} />}
+            <Marker
+            lat={location.lat}
+            lng={location.lng}
+            name="My Marker"
+            color="red"
+          />
+           
           </GoogleMap>
+                    
+
+
         </div>  
       );
 }) 
