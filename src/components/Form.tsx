@@ -35,7 +35,7 @@ const Form = React.memo<IProps>((props)=>{
   const handleLatLng = async (address: string) => {
     const results = await geocodeByAddress(address);
     const latLong = await getLatLng(results[0]);
-    props.setForm({...props.form, lat:latLong.lat, lng: latLong.lng})
+    props.setForm({...props.form, address: address, lat:latLong.lat, lng: latLong.lng})
   } 
 
   const handleDateHour = (event: any) => {

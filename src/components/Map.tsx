@@ -103,6 +103,7 @@ export const Map = React.memo<IProps>((props) => {
   
     return (
         <div style={{ height: '100vh', width: '100%' }}>
+           {state.mapsApiLoaded && <SearchBox map={state.mapInstance} mapsapi={state.mapsapi} placeholder ={PropTypes.string} onPlacesChanged = {PropTypes.func} location = {location} setLocation = {setLocation} />}
           <GoogleMap 
             bootstrapURLKeys={{
               key: API_KEY,
@@ -120,13 +121,12 @@ export const Map = React.memo<IProps>((props) => {
             }} >
             {props.markers}
             <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&sensor=false"></script>
-            {state.mapsApiLoaded && <SearchBox map={state.mapInstance} mapsapi={state.mapsapi} placeholder ={PropTypes.string} onPlacesChanged = {PropTypes.func} location = {location} setLocation = {setLocation} />}
-            <Marker
+            {/* <Marker
             lat={location.lat}
             lng={location.lng}
             name="My Marker"
             color="red"
-          />
+          /> */}
            
           </GoogleMap>
                     
