@@ -119,7 +119,7 @@ export const Map = React.memo<IProps>((props) => {
             onGoogleApiLoaded={({ map, maps }) => {
               apiLoaded(map, maps);
             }} >
-            {props.markers}
+            {/* {props.markers} */}
             <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&sensor=false"></script>
             {/* <Marker
             lat={location.lat}

@@ -6,7 +6,7 @@ import {
     StylesProvider,
     ThemeProvider,
   } from "@material-ui/core/styles";
-import { Button, Input, InputLabel, NativeSelect, TextField } from '@material-ui/core';
+import { Button, Icon, Input, InputLabel, NativeSelect, TextField } from '@material-ui/core';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -18,6 +18,7 @@ interface IProps {
     setShow: any
     form: any
     setForm: any
+    handleSubmit: any
   }
 
 
@@ -141,7 +142,7 @@ const Form = React.memo<IProps>((props)=>{
 
 
   const avigdush = (shmigli: any) => {console.log(shmigli.target.value)} // to delete later
-  return (<form>
+  return (<form onSubmit = {props.handleSubmit}>
             <div>
                 <div>
                 <TextField
@@ -226,6 +227,17 @@ const Form = React.memo<IProps>((props)=>{
           </div>  
               <div>
                   <Button variant="contained" onClick={()=>props.setShow(false)}>cancle</Button>
+              </div>
+              <div>
+              <Button
+        variant="contained"
+        type = "submit"
+        color="primary"
+        // className={classes.button}
+        endIcon={<Icon>send</Icon>}
+      >
+        Submit
+      </Button>
               </div>
             </div>
           </form>)

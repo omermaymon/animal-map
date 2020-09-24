@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Map from "./components/Map";
 import Form from "./components/Form"
-import PlacesAutocomplete, {
-    geocodeByAddress,
-    getLatLng,
-  } from 'react-places-autocomplete';
 import { Button } from '@material-ui/core';
+import axios from 'axios'
 
 export interface cordi{
     lat: number | undefined
@@ -32,9 +29,26 @@ const App = React.memo(()=>{
     const [show, setShow] = useState<boolean>(false)
     const [markers, setMarkers] = useState<object[]>([])  
     const [cordinates, setCordinates] = useState<cordi>({lat: undefined, lng: undefined})
-    console.log(form)
+    
+    
+    useEffect(() => {
+        console.log('effect')
+        axios
+          .get('http://localhost:3001/forms')
+          .then(response => {
+            console.log('promise fulfilled')
+            setMarkers(response.data)
+          })
+      }, [])
+    
+    const handleSubmit = (event: any) => {
+        event.preventDefault()
+        console.log("im in handle1!!!!!!!!!!!")
+        axios.post('http://localhost:3001/forms', form)
+        .then((response) => {console.log(response); setMarkers(markers.concat(form)) })
+    }  
     if (show){
-        return <Form cordinates={cordinates} setShow = {setShow} form={form} setForm= {setForm}/>
+        return <Form cordinates={cordinates} setShow = {setShow} form={form} setForm= {setForm} handleSubmit = {handleSubmit}/>
     }
     else{
         return (
