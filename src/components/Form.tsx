@@ -11,7 +11,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-import API_KEY from "./Map";
+import axios from 'axios'
 
 interface IProps {
     cordinates: cordi
