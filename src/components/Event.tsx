@@ -8,7 +8,7 @@ export const Event = React.memo<IProps>((props)=>{
 
   
     return (
-      <div className="marker"
+      <div className="Event"
         style={{cursor: 'pointer' }}
       >{props.text}</div>
     );

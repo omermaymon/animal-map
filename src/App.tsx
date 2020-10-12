@@ -3,6 +3,10 @@ import Map from "./components/Map";
 import Form from "./components/Form"
 import { Button } from '@material-ui/core';
 import axios from 'axios'
+import Filter from './components/Filter'
+import { getAllByAltText } from '@testing-library/react';
+import service from './components/axios'
+
 
 export interface cordi{
     lat: number | undefined
@@ -29,23 +33,23 @@ const App = React.memo(()=>{
     const [show, setShow] = useState<boolean>(false)
     const [markers, setMarkers] = useState<object[]>([])  
     const [cordinates, setCordinates] = useState<cordi>({lat: undefined, lng: undefined})
+    const [animalFilter, setAnimalFilter] = useState<string>("")
+    const [eventFilter, setEventFilter] = useState<string>("")
+    const [startDateFilter, setStartDateFilter] = useState<Date>()
+    const [endDateFilter, setEndDateFilter] = useState<Date>()
     
-    
+    console.log(`this is markers:`, markers)
     useEffect(() => {
         console.log('effect')
-        axios
-          .get('http://localhost:3001/forms')
-          .then(response => {
-            console.log('promise fulfilled')
-            setMarkers(response.data)
-          })
+        service.getAll().then((event) => setMarkers(event))
       }, [])
     
     const handleSubmit = (event: any) => {
         event.preventDefault()
         console.log("im in handle1!!!!!!!!!!!")
-        axios.post('http://localhost:3001/forms', form)
-        .then((response) => {console.log(response); setMarkers(markers.concat(form)) })
+        service.addEvent(form).then((event) => {setMarkers(markers.concat(form)); setShow(false) }).catch((error)=>console.log(error))
+        
+        
     }  
     if (show){
         return <Form cordinates={cordinates} setShow = {setShow} form={form} setForm= {setForm} handleSubmit = {handleSubmit}/>
@@ -55,6 +59,11 @@ const App = React.memo(()=>{
                 <div>
                     <div>
                         <Button variant="contained" onClick={() => setShow(!show)}>Fill a form</Button>
+                    </div>
+                    <div>
+                        <Filter animalFilter={animalFilter} setAnimalFilter={setAnimalFilter} eventFilter={eventFilter}
+                        setEventFilter={setEventFilter} startDateFilter={startDateFilter} setStartDateFilter={setStartDateFilter} 
+                        endDateFilter={endDateFilter} setEndDateFilter={setEndDateFilter}/>
                     </div>
                     <div>
                     <Map events={events} toShow = {setShow} markers = {markers} setMarkers = {setMarkers} setCordinates = {setCordinates} />

@@ -40,17 +40,17 @@ const Form = React.memo<IProps>((props)=>{
   } 
 
   const handleDateHour = (event: any) => {
-    console.log(event.target.value)
+    
     props.setForm({...props.form, date: event.target.value})
   }
 
   const handleAnimal = (event: any) => {
-    console.log(event.target.value)
+    
     props.setForm({...props.form, animal: event.target.value})
   }
 
   const handlenumOfAnimals = (event: any) => {
-    console.log(event.target.value)
+    
     props.setForm({...props.form, numOfAnimals: event.target.value})
   }
 
@@ -59,7 +59,7 @@ const Form = React.memo<IProps>((props)=>{
   }
 
   const handlePerson = (event: any) => {
-    console.log(event.target.value)
+    
     props.setForm({...props.form, nameOfPerson: event.target.value})
   }
 
@@ -141,7 +141,7 @@ const Form = React.memo<IProps>((props)=>{
 
 
 
-  const avigdush = (shmigli: any) => {console.log(shmigli.target.value)} // to delete later
+ 
   return (<form onSubmit = {props.handleSubmit}>
             <div>
                 <div>

@@ -121,12 +121,12 @@ export const Map = React.memo<IProps>((props) => {
             }} >
             {/* {props.markers} */}
             <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&sensor=false"></script>
-            {/* <Marker
+            <Marker
             lat={location.lat}
             lng={location.lng}
             name="My Marker"
-            color="red"
-          /> */}
+            color="blue"
+          />
            
           </GoogleMap>
                     

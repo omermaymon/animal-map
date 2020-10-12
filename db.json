@@ -1,36 +1,20 @@
 {
-  "forms": [
+  "events": [
     {
-      "id": "1",
-      "address": "",
-      "date": "",
-      "animal": "Cat",
-      "numOfAnimals": "0",
+      "address": "גוש חלב, ישראל",
+      "date": "2020-10-02T14:58",
+      "animal": "Dog",
+      "numOfAnimals": "11",
       "typeOfEvent": "",
-      "nameOfPerson": "",
+      "nameOfPerson": "0542410117",
       "phone": "",
-      "lat": "0",
-      "lng": "0",
-      "feederName": "",
-      "feederPhone": "",
-      "sterlizedCats": "0",
-      "unsterlizedCats": "0"
-    },
-    {
-      "address": "",
-      "date": "2020-09-10T21:53",
-      "animal": "Cat",
-      "numOfAnimals": 0,
-      "typeOfEvent": "",
-      "nameOfPerson": "",
-      "phone": "",
-      "lat": 0,
-      "lng": 0,
+      "lat": 33.021266,
+      "lng": 35.447949,
       "feederName": "",
       "feederPhone": "",
       "sterlizedCats": 0,
       "unsterlizedCats": 0,
-      "id": "ZZQd3sF"
+      "id": 1
     }
   ]
 }
