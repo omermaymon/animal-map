@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 
-const url = "http://localhost:3001/events"
+const url = "/api/forms"
 
 
 const getAll = () =>

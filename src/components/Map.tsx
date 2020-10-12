@@ -22,7 +22,7 @@ interface IProps  {
 
 
 
-const API_KEY = 'AIzaSyAmu9nol12It2xvWk00g4NwocROPL2rFZs';
+const API_KEY = ;
 
 
 const defaultProps = {
