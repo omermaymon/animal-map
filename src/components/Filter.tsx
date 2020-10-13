@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputLabel, NativeSelect, TextField } from '@material-ui/core';
+import { Button, InputLabel, NativeSelect, TextField } from '@material-ui/core';
 interface IProps  {
     animalFilter: string
     setAnimalFilter: any
@@ -9,10 +9,18 @@ interface IProps  {
     setStartDateFilter: any
     endDateFilter: Date | undefined
     setEndDateFilter: any
+    setUseFilter: any
   }
 
-const Filter = React.memo<IProps>((props) =>{
 
+const Filter = React.memo<IProps>((props) =>{
+    const returnNormal = () =>{
+      props.setUseFilter(false)
+      props.setAnimalFilter("")
+      props.setEventFilter("")
+      props.setStartDateFilter(undefined)
+      props.setEndDateFilter(undefined)
+    }
     const eventsForAnimals = (animal: string) => {
         switch (animal){
           case "Cat" :
@@ -59,7 +67,7 @@ const Filter = React.memo<IProps>((props) =>{
     return (
     <div>
         <InputLabel htmlFor="select">Type of animal:</InputLabel>
-        <NativeSelect id="select" onChange = {(event:any)=> props.setAnimalFilter(event.target.value)}>
+        <NativeSelect id="select" value={props.animalFilter} onChange = {(event:any)=> props.setAnimalFilter(event.target.value)}>
             <option value=""></option>
             <option value="Cat">Cat</option>
             <option value="Fox">Fox</option>
@@ -75,24 +83,26 @@ const Filter = React.memo<IProps>((props) =>{
             id="date"
             label="Start date:"
             type="datetime-local"
-            defaultValue={new Date()}
+            //defaultValue={new Date()}
+            value={props.startDateFilter? props.startDateFilter: "yyyy-mm-dd"}
             InputLabelProps={{
               shrink: true,
             }}
         />
-
         <TextField
             onChange = {(event:any)=> props.setEndDateFilter(event.target.value)}
             id="date"
             label="End date:"
             type="datetime-local"
-            defaultValue={new Date()}
+            //defaultValue={new Date()}
+            value={props.endDateFilter? props.startDateFilter: "yyyy-mm-dd"}
             InputLabelProps={{
               shrink: true,
             }}
         />
-
-
+        <Button variant="contained" onClick={()=>props.setUseFilter(true)}>Filter</Button>
+        <Button variant="contained" onClick={returnNormal}>Unfilter</Button>
+              
     </div>
     )
 })

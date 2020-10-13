@@ -18,6 +18,11 @@ interface IProps  {
   markers: any[]
   setMarkers: any
   setCordinates: any
+  useFilter: boolean 
+  animalFilter: string
+  eventFilter: string
+  startDateFilter: Date|undefined
+  endDateFilter: Date|undefined
 }
 
 
@@ -30,18 +35,18 @@ const defaultProps = {
     zoom: 13.54
 }
 
-const getColorByEventType = (eventType: string) => {
-  switch (eventType) {
-    case EventTypes.FleeingJackal:
-      return 'yellow';
-    case EventTypes.OffensiveJackal:
-      return 'orange';
-    case EventTypes.JackalHit:
-      return 'red';
-    default:
-      return 'green';
-  }
-}
+// const getColorByAnimalType = (AnimalType: string) => {
+//   switch (AnimalType) {
+//     case "Cat":
+//       return 'yellow';
+//     case "Dog":
+//       return 'blue';
+//     case "Fox":
+//       return 'red';
+//     case "Jackal":  
+//       return 'green';
+//   }
+// }
 
 
 
@@ -119,14 +124,14 @@ export const Map = React.memo<IProps>((props) => {
             onGoogleApiLoaded={({ map, maps }) => {
               apiLoaded(map, maps);
             }} >
-            {/* {props.markers} */}
+            {props.markers}
             <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&sensor=false"></script>
-            <Marker
+            {/* <Marker
             lat={location.lat}
             lng={location.lng}
             name="My Marker"
             color="blue"
-          />
+          /> */}
            
           </GoogleMap>
                     
