@@ -55,6 +55,7 @@ const Form = React.memo<IProps>((props)=>{
   }
 
   const handleTypeOfEvent = (event: any) => {
+    console.log("this is event: " ,event.target.value)
     props.setForm({...props.form, typeOfEvent: event.target.value})
   }
 
@@ -92,12 +93,14 @@ const Form = React.memo<IProps>((props)=>{
     switch (animal){
       case "Cat" :
         return (<NativeSelect id="select" onChange = {handleTypeOfEvent}>
+                  <option></option>          
                   <option value="Feeded cats">Feeded cats</option>
                   <option value="None Feeded cats">None Feeded cats</option>
                   <option value="Giving Birth">Giving Birth</option>
                 </NativeSelect>);
       case "Dog" :
         return (<NativeSelect id="select" onChange = {handleTypeOfEvent}>
+                  <option></option>
                   <option value="Wondering dog without owner">Wondering dog without owner</option>
                   <option value="Dog not on a leash with owner">Dog not on a leash with owner</option>
                   <option value="Wondering and aggressive dog">Wondering and aggressive dog</option>
@@ -105,6 +108,7 @@ const Form = React.memo<IProps>((props)=>{
                 </NativeSelect>);
       case "Fox" :
         return (<NativeSelect id="select" onChange = {handleTypeOfEvent}>
+                  <option></option>
                   <option value="Seen from a distance">Seen from a distance</option>
                   <option value="Seen with puppies">Seen with puppies</option>
                   <option value="Seen and came closer">Seen and came closer</option>
@@ -112,6 +116,7 @@ const Form = React.memo<IProps>((props)=>{
                 </NativeSelect>);
       case "Jackle" :
         return (<NativeSelect id="select" onChange = {handleTypeOfEvent}>
+                  <option></option>
                   <option value="Seen from a distance">Seen from a distance</option>
                   <option value="Seen with puppies">Seen with puppies</option>
                   <option value="Seen and came closer">Seen and came closer</option>
@@ -150,7 +155,7 @@ const Form = React.memo<IProps>((props)=>{
                   id="date"
                   label="Date and time of event:"
                   type="datetime-local"
-                  defaultValue={props.form.date}
+                  value={props.form.date}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -206,7 +211,7 @@ const Form = React.memo<IProps>((props)=>{
           </div>
           <div>
           <InputLabel htmlFor="input">Insert phone number:</InputLabel>
-            <Input inputProps={{ 'aria-label': 'description' }} onChange={handlePerson} /> 
+            <Input inputProps={{ 'aria-label': 'description' }} onChange={handlePhone} /> 
           </div>
           <div>
             
